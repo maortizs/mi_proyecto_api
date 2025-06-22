@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: symfony-api
+    env: docker
+    repo: https://github.com/tu_usuario/tu_repositorio
+    branch: master
+    rootDir: .
+    plan: free
+
+    # No incluyas aquí JWT_PASSPHRASE, DATABASE_URL ni APP_SECRET.
+    # Los definirás luego en la UI de Render, en la sección
+    #   "Environment" > "Environment Variables".
+
+    envVars:
+      - key: APP_ENV
+        value: prod
+      # - key: JWT_PASSPHRASE    ← lo borras
+      # - key: DATABASE_URL      ← lo borras
+      # - key: APP_SECRET        ← lo borras
