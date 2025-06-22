@@ -1,5 +1,5 @@
 # 1) Usa la variante slim de Debian bookworm, parcheada:
-FROM php:8.3.19-cli-bookworm-slim
+FROM php:8.3-cli-slim
 
 # 2) Obligamos a que todos los paquetes del OS queden a la última:
 RUN apt-get update \
