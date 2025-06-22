@@ -28,12 +28,18 @@ COPY composer.json composer.lock ./
 # Permite que Composer ejecute plugins (Symfony Flex) aun siendo root
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Instalamos dependencias PHP sin dev y optimizamos
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction \
+    --no-scripts
 
-
-# 6) Copiamos el resto del proyecto
+# 3) Copiamos el resto del proyecto
 COPY . .
+
+# 4) Ahora sí podemos limpiar y precalentar caché
+RUN php bin/console cache:clear --no-warmup --env=prod \
+ && php bin/console cache:warmup --env=prod
 
 EXPOSE 8000
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
