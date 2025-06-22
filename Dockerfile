@@ -24,9 +24,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 COPY composer.json composer.lock ./
+
+# Permite que Composer ejecute plugins (Symfony Flex) aun siendo root
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # Instalamos dependencias PHP sin dev y optimizamos
-RUN composer install --no-dev --optimize-autoloader \
- && rm -rf ~/.composer
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
 
 # 6) Copiamos el resto del proyecto
 COPY . .
