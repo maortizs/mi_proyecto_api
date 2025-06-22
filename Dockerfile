@@ -38,8 +38,8 @@ RUN composer install \
 COPY . .
 
 # 4) Ahora sí podemos limpiar y precalentar caché
-RUN php bin/console cache:clear --no-warmup --env=prod \
- && php bin/console cache:warmup --env=prod
+# RUN php bin/console cache:clear --no-warmup --env=prod \
+# && php bin/console cache:warmup --env=prod
 
 EXPOSE 8000
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
