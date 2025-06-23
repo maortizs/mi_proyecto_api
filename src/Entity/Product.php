@@ -7,7 +7,9 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json' => ['application/json']]
+)]
 class Product
 {
     #[ORM\Id]
